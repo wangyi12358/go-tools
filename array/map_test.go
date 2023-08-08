@@ -21,7 +21,3 @@ func TestMap(t *testing.T) {
 		t.Error("Map failed, expected [test testing], got ", result)
 	}
 }
-
-func test() {
-
-}
