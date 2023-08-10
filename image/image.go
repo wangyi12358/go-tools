@@ -3,6 +3,7 @@ package image
 import (
 	"encoding/base64"
 	"fmt"
+	"image"
 	"io"
 	"net/http"
 	"path"
@@ -32,4 +33,24 @@ func ImageToBase64(imageUrl string) (base64Str string, err error) {
 	encodedImage := base64.StdEncoding.EncodeToString(imageData)
 	ext := path.Ext(imageUrl)[1:]
 	return "data:image/" + ext + ";base64," + encodedImage, nil
+}
+
+func GetImageSize(src string) (int, int) {
+	response, err := http.Get(src)
+	if err != nil {
+		panic(err)
+	}
+	defer response.Body.Close()
+
+	// 通过image.Decode获取图片对象
+	img, _, err := image.Decode(response.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	// 获取图片宽高信息
+	bounds := img.Bounds()
+	width, height := bounds.Dx(), bounds.Dy()
+
+	return width, height
 }
