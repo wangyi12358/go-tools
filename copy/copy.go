@@ -22,7 +22,6 @@ func Copy(source interface{}, target interface{}, conf *Config) error {
 		return ErrInvalidSource
 	}
 	fmt.Printf("sourceValue.Type(): %s", sourceValue.Kind())
-
 	//sourceType, isPtrFrom := indirectType(sourceValue.Type())
 	//toType, _ := indirectType(to.Type())
 	//
